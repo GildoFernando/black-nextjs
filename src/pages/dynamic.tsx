@@ -7,49 +7,37 @@ interface ApiResponse {
     timestamp: Date
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-    try {
+export const getServerSideProps: GetServerSideProps = async () => {    
         const serverSideData: ApiResponse = await fetch(`${process.env.NEXT_PUBLIC_APIURL}/api/hello`).then(res => res.json())
-        console.log("Dados do servidor:", serverSideData); 
+        
         return {
             props: {
                 serverSideData
             }
         }
-    } catch (error) {
-        console.error("Erro ao buscar dados do servidor:", error);
-        return {
-            props: {
-                serverSideData: null 
-            }
-        }
-    }
-}
+    } 
+
+
 
 const Dynamic: NextPage = (props: {
     children?: ReactNode
     serverSideData?: ApiResponse
 }) => {
-    const [clientSideData, setClientSideData] = useState<ApiResponse>()
+     const [clientSideData, setClientSideDAta] = useState<ApiResponse>()
 
-    useEffect(() => {
+     useEffect(() => {
         fetchData()
-    }, [])
+     }, [])
 
-    const fetchData = async () => {
-        try {
-            const data = await fetch("/api/hello").then(res => res.json())
-            console.log("Dados do cliente:", data); 
-            setClientSideData(data)
-        } catch (error) {
-            console.error("Erro ao buscar dados do cliente:", error);
-        }
-    }
-    console.log("Props de servidor:", props.serverSideData);
+     const fetchData = async () => {
+        const data = await fetch("/api/hello").then(res => res.json())
+        setClientSideDAta(data)
+     }
+
 
     return (
         <Container tag="main">
-            <h1>
+            <h1 className="my-5">
                 Como funcionam as renderizações do Next.js
             </h1>
 
@@ -59,7 +47,7 @@ const Dynamic: NextPage = (props: {
                         Gerado no servidor:
                     </h3>
                     <h2>
-                        {props.serverSideData ? props.serverSideData.timestamp.toString() : 'Carregando...'}
+                        {props.serverSideData?.timestamp.toString()}
                     </h2>
                 </Col>
 
@@ -68,7 +56,7 @@ const Dynamic: NextPage = (props: {
                         Gerado no cliente:
                     </h3>
                     <h2>
-                        {clientSideData ? clientSideData.timestamp.toString() : 'Carregando...'}
+                       {clientSideData?.timestamp.toString()}
                     </h2>
                 </Col>
             </Row>

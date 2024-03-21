@@ -20,7 +20,7 @@ export const getStaticProps: GetStaticProps = async () => {
         console.error("Erro ao buscar dados estáticos:", error);
         return {
             props: {
-                staticData: null // ou qualquer outro valor padrão
+                staticData: null 
             }
         };
     }

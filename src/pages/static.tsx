@@ -7,24 +7,15 @@ interface ApiResponse {
     timestamp: Date
 }
 export const getStaticProps: GetStaticProps = async () => {
-    try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_APIURL}/api/hello`);
-        const staticData: ApiResponse = await response.json();
+        const staticData = await fetch(`${process.env.NEXT_PUBLIC_APIURL}/api/hello`).then(res => res.json())
+        
     
         return {
             props: {
                 staticData
             }
-        };
-    } catch (error) {
-        console.error("Erro ao buscar dados estáticos:", error);
-        return {
-            props: {
-                staticData: null 
-            }
-        };
-    }
-};
+        };    
+}
 
 
 

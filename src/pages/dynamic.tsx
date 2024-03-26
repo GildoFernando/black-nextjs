@@ -25,7 +25,7 @@ const Dynamic: NextPage = (props: {
 }) => {
      const [clientSideData, setClientSideDAta] = useState<ApiResponse>()
 
-     useEffect(() => {
+     useEffect(() => {  
         fetchData()
      }, [])
 

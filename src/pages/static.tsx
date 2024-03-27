@@ -8,23 +8,16 @@ interface ApiResponse {
 }
  
 export const getStaticProps: GetStaticProps = async () => {
-    try {
+
         const staticData:  ApiResponse = await fetch(`${process.env.NEXT_PUBLIC_APIURL}/api/hello`).then(res => res.json());
         
         return {
             props: {
                 staticData
-            }
-        };
-    } catch (error) {
-        console.error("Erro ao buscar dados estáticos:", error);
-        return {
-            props: {
-                staticData: null // ou algum valor padrão para staticData
-            }
-        };
-    }
-};
+            },
+            revalidate: 10
+        }
+    } 
 
 
 

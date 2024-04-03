@@ -7,4 +7,4 @@ function MyApp({ Component, pageProps }: AppProps) {
 export default MyApp
 
 
-//paramos 15:
+//paramos 15:00

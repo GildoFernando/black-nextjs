@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8d4fa4fb474b0c21764b9b25e91a4bce773fab84
 import { NextPage } from "next";
 import Head from "next/head";
 
